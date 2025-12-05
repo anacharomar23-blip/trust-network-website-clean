@@ -39,7 +39,7 @@ const galleryItems = [
     title: "Suporte Técnico",
     description: "Equipa especializada pronta para ajudar.",
     // Link atualizado e funcional
-    image: "/public/foto-nova.jpg"
+    image: "/img/foto-nova.jpg"
   }
 ];
 
