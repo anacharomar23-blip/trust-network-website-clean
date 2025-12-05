@@ -2,6 +2,10 @@ import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowLeft, CheckCircle2, Zap, Trophy, Lightbulb } from 'lucide-react';
 
+// Workaround for framer-motion type mismatch
+const MotionButton = motion.button as any;
+const MotionDiv = motion.div as any;
+
 export interface ServiceData {
   id: string;
   title: string;
@@ -31,7 +35,7 @@ const ServicePage: React.FC<ServicePageProps> = ({ data, onBack }) => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Back Button */}
-        <motion.button
+        <MotionButton
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           onClick={onBack}
@@ -39,10 +43,10 @@ const ServicePage: React.FC<ServicePageProps> = ({ data, onBack }) => {
         >
           <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
           Voltar para Início
-        </motion.button>
+        </MotionButton>
 
         {/* Header */}
-        <motion.div
+        <MotionDiv
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
@@ -57,13 +61,13 @@ const ServicePage: React.FC<ServicePageProps> = ({ data, onBack }) => {
               <p key={idx}>{paragraph}</p>
             ))}
           </div>
-        </motion.div>
+        </MotionDiv>
 
         {/* Main Content Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           
           {/* Left Column: What We Offer */}
-          <motion.div
+          <MotionDiv
             initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
@@ -82,13 +86,13 @@ const ServicePage: React.FC<ServicePageProps> = ({ data, onBack }) => {
                 ))}
               </ul>
             </div>
-          </motion.div>
+          </MotionDiv>
 
           {/* Right Column: Why Choose Us & Benefits */}
           <div className="space-y-8">
             
             {/* Why Us */}
-            <motion.div
+            <MotionDiv
               initial={{ opacity: 0, x: 30 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6, delay: 0.3 }}
@@ -106,10 +110,10 @@ const ServicePage: React.FC<ServicePageProps> = ({ data, onBack }) => {
                   </li>
                 ))}
               </ul>
-            </motion.div>
+            </MotionDiv>
 
             {/* Benefits */}
-            <motion.div
+            <MotionDiv
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.4 }}
@@ -127,12 +131,12 @@ const ServicePage: React.FC<ServicePageProps> = ({ data, onBack }) => {
                   </div>
                 ))}
               </div>
-            </motion.div>
+            </MotionDiv>
           </div>
         </div>
 
         {/* Call to Action */}
-        <motion.div
+        <MotionDiv
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.6 }}
@@ -152,7 +156,7 @@ const ServicePage: React.FC<ServicePageProps> = ({ data, onBack }) => {
           >
             Fale com um Especialista Agora
           </a>
-        </motion.div>
+        </MotionDiv>
 
       </div>
     </div>

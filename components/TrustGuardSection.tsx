@@ -2,6 +2,9 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { ShieldCheck, Network, Zap, Lock, Globe2, Coins } from 'lucide-react';
 
+// Workaround for framer-motion type mismatch
+const MotionDiv = motion.div as any;
+
 const TrustGuardSection: React.FC = () => {
   const handleRequestInstallation = () => {
     const email = "trustnetwork.vendas@outlook.com";
@@ -27,7 +30,7 @@ Atenciosamente,
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           
-          <motion.div 
+          <MotionDiv 
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
@@ -68,9 +71,9 @@ Atenciosamente,
                  desc="Elimine múltiplos servidores e custos de chamadas entre filiais." 
                />
             </div>
-          </motion.div>
+          </MotionDiv>
 
-          <motion.div 
+          <MotionDiv 
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
@@ -117,7 +120,7 @@ Atenciosamente,
 
             {/* Background Element */}
             <div className="absolute -inset-4 bg-gradient-to-r from-tech-trust to-blue-600 rounded-3xl blur-lg opacity-30 z-0"></div>
-          </motion.div>
+          </MotionDiv>
 
         </div>
       </div>

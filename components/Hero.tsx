@@ -2,6 +2,11 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight, Activity, Server, Shield } from 'lucide-react';
 
+// Workaround for framer-motion type mismatch
+const MotionDiv = motion.div as any;
+const MotionH1 = motion.h1 as any;
+const MotionP = motion.p as any;
+
 const Hero: React.FC = () => {
   return (
     <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden pt-16">
@@ -15,7 +20,7 @@ const Hero: React.FC = () => {
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center text-center">
         
-        <motion.div 
+        <MotionDiv 
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
@@ -26,9 +31,9 @@ const Hero: React.FC = () => {
             <span className="relative inline-flex rounded-full h-3 w-3 bg-tech-trust"></span>
           </span>
           <span className="text-sm font-medium text-gray-300 tracking-wide">Inovação em Telecomunicações</span>
-        </motion.div>
+        </MotionDiv>
 
-        <motion.h1 
+        <MotionH1 
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, delay: 0.2 }}
@@ -36,9 +41,9 @@ const Hero: React.FC = () => {
         >
           CONECTANDO <br />
           <span className="bg-clip-text text-transparent bg-gradient-to-r from-tech-trust to-teal-400">O FUTURO</span>
-        </motion.h1>
+        </MotionH1>
 
-        <motion.p 
+        <MotionP 
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.4 }}
@@ -46,9 +51,9 @@ const Hero: React.FC = () => {
         >
           Soluções avançadas em VoIP, Call Center e Segurança de Rede Unificada. 
           A Trust Network redefine como sua empresa se conecta, comunica e colabora.
-        </motion.p>
+        </MotionP>
 
-        <motion.div 
+        <MotionDiv 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.6 }}
@@ -63,7 +68,7 @@ const Hero: React.FC = () => {
           <a href="#contact" className="px-8 py-4 bg-transparent border border-white/20 text-white font-bold text-lg rounded-sm hover:bg-white/5 hover:border-white/40 transition-all">
             Fale com um Consultor
           </a>
-        </motion.div>
+        </MotionDiv>
 
         {/* Floating Features */}
         <div className="mt-20 grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-4xl">
@@ -77,7 +82,7 @@ const Hero: React.FC = () => {
 };
 
 const FeatureCard: React.FC<{icon: React.ReactNode, title: string, desc: string, delay: number}> = ({ icon, title, desc, delay }) => (
-  <motion.div 
+  <MotionDiv 
     initial={{ opacity: 0, y: 20 }}
     animate={{ opacity: 1, y: 0 }}
     transition={{ duration: 0.6, delay }}
@@ -88,7 +93,7 @@ const FeatureCard: React.FC<{icon: React.ReactNode, title: string, desc: string,
     </div>
     <h3 className="text-xl font-display font-bold text-white mb-2">{title}</h3>
     <p className="text-gray-400 text-sm">{desc}</p>
-  </motion.div>
+  </MotionDiv>
 );
 
 export default Hero;

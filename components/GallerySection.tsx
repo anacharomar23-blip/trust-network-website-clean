@@ -2,43 +2,44 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { ZoomIn } from 'lucide-react';
 
-
 const galleryItems = [
   {
     id: 1,
     title: "Infraestrutura de Redes",
     description: "Cabeamento estruturado e organização de racks.",
-    image: "infraestrutura-redes2.png"
+    // Link atualizado e funcional
+    image: "https://images.unsplash.com/photo-1551703599-6b3e8379aa8c?q=80&w=2000&auto=format&fit=crop"
   },
   {
     id: 2,
     title: "Centrais VoIP",
     description: "Servidores de alta performance para comunicação.",
-    image: "https://images.unsplash.com/photo-1597852074816-d933c7d2b988?q=80&w=2670&auto=format&fit=crop"
+    image: "https://images.unsplash.com/photo-1597852074816-d933c7d2b988?q=80&w=2000&auto=format&fit=crop"
   },
   {
     id: 3,
     title: "Call Center Moderno",
     description: "Equipamentos e software para atendimento eficiente.",
-    image: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?q=80&w=2672&auto=format&fit=crop"
+    image: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?q=80&w=2000&auto=format&fit=crop"
   },
   {
     id: 4,
     title: "Segurança de Dados",
     description: "Monitoramento e proteção de sistemas.",
-    image: "https://images.unsplash.com/photo-1563986768609-322da13575f3?q=80&w=1470&auto=format&fit=crop"
+    image: "https://images.unsplash.com/photo-1563986768609-322da13575f3?q=80&w=2000&auto=format&fit=crop"
   },
   {
     id: 5,
     title: "Conectividade",
     description: "Instalação de pontos de acesso e fibra óptica.",
-    image: "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?q=80&w=2670&auto=format&fit=crop"
+    image: "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?q=80&w=2000&auto=format&fit=crop"
   },
   {
     id: 6,
     title: "Suporte Técnico",
     description: "Equipa especializada pronta para ajudar.",
-    image: "infraestrutura-redes.png"
+    // Link atualizado e funcional
+    image: "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?q=80&w=2000&auto=format&fit=crop"
   }
 ];
 
@@ -53,12 +54,22 @@ const GallerySection: React.FC = () => {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-tech-trust font-display text-lg tracking-widest uppercase mb-2">
+          <motion.h2 
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            className="text-tech-trust font-display text-lg tracking-widest uppercase mb-2"
+          >
             Nosso Portfólio
-          </h2>
-          <h3 className="text-4xl md:text-5xl font-bold text-white mb-6">
+          </motion.h2>
+          <motion.h3 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-4xl md:text-5xl font-bold text-white mb-6"
+          >
             Galeria de Projetos
-          </h3>
+          </motion.h3>
           <p className="max-w-2xl mx-auto text-gray-400">
             Conheça um pouco da nossa estrutura e dos serviços que entregamos com excelência.
           </p>
@@ -89,6 +100,7 @@ const GalleryCard: React.FC<{ item: typeof galleryItems[0], index: number }> = (
         src={item.image} 
         alt={item.title} 
         className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+        loading="lazy"
       />
 
       {/* Overlay Gradient */}
