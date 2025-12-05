@@ -10,7 +10,7 @@ const galleryItems = [
     id: 1,
     title: "Infraestrutura de Redes",
     description: "Cabeamento estruturado e organização de racks.",
-    image: "https://images.unsplash.com/photo-1558494949-ef526b0042a0?q=80&w=2668&auto=format&fit=crop"
+    image: "C:\Users\Administrator\Documents\projeto site\trust-network-lda---tech-solutions5\trust-network-website-clean\public"
   },
   {
     id: 2,
