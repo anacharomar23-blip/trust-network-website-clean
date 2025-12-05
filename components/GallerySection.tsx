@@ -10,7 +10,7 @@ const galleryItems = [
     id: 1,
     title: "Infraestrutura de Redes",
     description: "Cabeamento estruturado e organização de racks.",
-    image: "/infraestrutura-redes.png"
+    image: "/infraestrutura-redes2.png"
   },
   {
     id: 2,
@@ -40,7 +40,7 @@ const galleryItems = [
     id: 6,
     title: "Suporte Técnico",
     description: "Equipa especializada pronta para ajudar.",
-    image: "https://images.unsplash.com/photo-1551434678-e076c2236033?q=80&w=2670&auto=format&fit=crop"
+    image: "/infraestrutura-redes.png"
   }
 ];
 
