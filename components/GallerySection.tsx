@@ -39,7 +39,7 @@ const galleryItems = [
     title: "Suporte Técnico",
     description: "Equipa especializada pronta para ajudar.",
     // Link atualizado e funcional
-    image: "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?q=80&w=2000&auto=format&fit=crop"
+    image: "/public/foto-nova.jpg"
   }
 ];
 
