@@ -8,9 +8,9 @@ import { ZoomIn } from 'lucide-react';
 const galleryItems = [
   {
     id: 1,
-    title: "infraestrutura-redes.png",
+    title: "Infraestrutura de Redes",
     description: "Cabeamento estruturado e organização de racks.",
-    image: "C:\Users\Administrator\Documents\projeto site\trust-network-lda---tech-solutions5\trust-network-website-clean\public"
+    image: "/infraestrutura-redes.png"
   },
   {
     id: 2,
