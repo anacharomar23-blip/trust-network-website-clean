@@ -2,15 +2,13 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { ZoomIn } from 'lucide-react';
 
-// --- ÁREA DE EDIÇÃO DE FOTOS ---
-// Aqui você pode substituir as URLs pelas suas fotos reais.
-// O tamanho recomendado é 800x600px ou proporção 4:3.
+
 const galleryItems = [
   {
     id: 1,
     title: "Infraestrutura de Redes",
     description: "Cabeamento estruturado e organização de racks.",
-    image: "/infraestrutura-redes2.png"
+    image: "infraestrutura-redes2.png"
   },
   {
     id: 2,
@@ -40,7 +38,7 @@ const galleryItems = [
     id: 6,
     title: "Suporte Técnico",
     description: "Equipa especializada pronta para ajudar.",
-    image: "/infraestrutura-redes.png"
+    image: "infraestrutura-redes.png"
   }
 ];
 
