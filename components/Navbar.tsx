@@ -1,16 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, ChevronDown } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-interface NavbarProps {
-  onNavigate: (pageId: string) => void;
-}
-
-const Navbar: React.FC<NavbarProps> = ({ onNavigate }) => {
+const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [isServicesOpen, setIsServicesOpen] = useState(false);
-  const [isMobileServicesOpen, setIsMobileServicesOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -20,23 +14,38 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate }) => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement | HTMLButtonElement>, targetId: string) => {
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {
     e.preventDefault();
     setIsOpen(false);
-    setIsServicesOpen(false);
-    
-    onNavigate(targetId);
+
+    // Rola para o topo se for home
+    if (targetId === '#home') {
+       window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+      return;
+    }
+
+    // Busca o elemento e rola com offset
+    const element = document.querySelector(targetId);
+    if (element) {
+      const headerOffset = 85; // Altura do menu + margem
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.scrollY - headerOffset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
+    }
   };
 
-  const servicesLinks = [
-    { name: 'Instalação rede de Dado', id: 'data-network' },
-    { name: 'Instalação de rede de voz', id: 'voice-network' },
-    { name: 'Call Center', id: 'call-center' },
-  ];
-
-  const remainingLinks = [
+  const navLinks = [
+    { name: 'Início', href: '#home' },
     { name: 'VoIP Server', href: '#voip' },
     { name: 'TrustGuard', href: '#trustguard' },
+    { name: 'Loja', href: '#store' },
     { name: 'Galeria', href: '#gallery' },
     { name: 'Contactos', href: '#contact' },
   ];
@@ -53,7 +62,7 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate }) => {
         <div className="flex items-center justify-between h-10">
           <div 
             className="flex-shrink-0 flex items-center gap-3 cursor-pointer group" 
-            onClick={(e) => handleNavClick(e as any, '#home')}
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
           >
              {/* Custom Trust Network Logo SVG */}
              <div className="relative w-10 h-10 flex items-center justify-center">
@@ -81,58 +90,8 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate }) => {
           </div>
           
           <div className="hidden md:block">
-            <div className="ml-10 flex items-center space-x-6 lg:space-x-8">
-              {/* Home Link */}
-              <a
-                href="#home"
-                onClick={(e) => handleNavClick(e, '#home')}
-                className="relative group px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:text-white transition-colors duration-200 cursor-pointer"
-              >
-                Início
-                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-tech-trust transition-all duration-300 group-hover:w-full"></span>
-              </a>
-
-              {/* Services Dropdown */}
-              <div 
-                className="relative group"
-                onMouseEnter={() => setIsServicesOpen(true)}
-                onMouseLeave={() => setIsServicesOpen(false)}
-                onClick={() => setIsServicesOpen(!isServicesOpen)}
-              >
-                <button 
-                  className="flex items-center gap-1 px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:text-white transition-colors duration-200 focus:outline-none"
-                >
-                  Serviços
-                  <ChevronDown size={14} className={`transition-transform duration-200 ${isServicesOpen ? 'rotate-180 text-tech-trust' : ''}`} />
-                </button>
-                
-                <AnimatePresence>
-                  {isServicesOpen && (
-                    <motion.div
-                      initial={{ opacity: 0, y: 10, scale: 0.95 }}
-                      animate={{ opacity: 1, y: 0, scale: 1 }}
-                      exit={{ opacity: 0, y: 10, scale: 0.95 }}
-                      transition={{ duration: 0.2 }}
-                      className="absolute top-full left-0 w-64 mt-2 bg-tech-card/95 backdrop-blur-xl border border-white/10 rounded-lg shadow-2xl overflow-hidden ring-1 ring-black ring-opacity-5 z-50"
-                    >
-                      <div className="py-1">
-                        {servicesLinks.map((link) => (
-                          <button
-                            key={link.id}
-                            onClick={(e) => handleNavClick(e, link.id)}
-                            className="block w-full text-left px-4 py-3 text-sm text-gray-300 hover:bg-white/10 hover:text-tech-trust transition-colors border-l-2 border-transparent hover:border-tech-trust"
-                          >
-                            {link.name}
-                          </button>
-                        ))}
-                      </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
-
-              {/* Remaining Links */}
-              {remainingLinks.map((link) => (
+            <div className="ml-10 flex items-baseline space-x-8">
+              {navLinks.map((link) => (
                 <a
                   key={link.name}
                   href={link.href}
@@ -143,11 +102,10 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate }) => {
                   <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-tech-trust transition-all duration-300 group-hover:w-full"></span>
                 </a>
               ))}
-              
               <a 
                 href="#contact"
                 onClick={(e) => handleNavClick(e, '#contact')}
-                className="px-5 py-2 rounded-full bg-tech-trust/10 border border-tech-trust/50 text-tech-trust hover:bg-tech-trust hover:text-white transition-all duration-300 font-bold text-sm cursor-pointer whitespace-nowrap"
+                className="px-5 py-2 rounded-full bg-tech-trust/10 border border-tech-trust/50 text-tech-trust hover:bg-tech-trust hover:text-white transition-all duration-300 font-bold text-sm cursor-pointer"
               >
                 Fale Conosco
               </a>
@@ -174,46 +132,7 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate }) => {
             className="md:hidden bg-tech-card/95 backdrop-blur-xl border-b border-gray-700 overflow-hidden"
           >
             <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-              <a
-                href="#home"
-                onClick={(e) => handleNavClick(e, '#home')}
-                className="text-gray-300 hover:text-white hover:bg-white/10 block px-3 py-4 rounded-md text-base font-medium border-l-2 border-transparent hover:border-tech-trust transition-all cursor-pointer"
-              >
-                Início
-              </a>
-
-              {/* Mobile Services Dropdown */}
-              <div className="rounded-md overflow-hidden">
-                <button
-                  onClick={() => setIsMobileServicesOpen(!isMobileServicesOpen)}
-                  className="w-full flex items-center justify-between text-gray-300 hover:text-white hover:bg-white/10 px-3 py-4 rounded-md text-base font-medium border-l-2 border-transparent hover:border-tech-trust transition-all cursor-pointer text-left focus:outline-none"
-                >
-                  Serviços
-                  <ChevronDown size={16} className={`transition-transform ${isMobileServicesOpen ? 'rotate-180' : ''}`} />
-                </button>
-                <AnimatePresence>
-                  {isMobileServicesOpen && (
-                    <motion.div
-                      initial={{ opacity: 0, height: 0 }}
-                      animate={{ opacity: 1, height: 'auto' }}
-                      exit={{ opacity: 0, height: 0 }}
-                      className="bg-black/20"
-                    >
-                      {servicesLinks.map((link) => (
-                         <button
-                           key={link.id}
-                           onClick={(e) => handleNavClick(e, link.id)}
-                           className="w-full text-left text-gray-400 hover:text-tech-trust block px-6 py-3 text-sm border-l-2 border-gray-800 hover:border-tech-trust/50"
-                         >
-                           {link.name}
-                         </button>
-                      ))}
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
-
-              {remainingLinks.map((link) => (
+              {navLinks.map((link) => (
                 <a
                   key={link.name}
                   href={link.href}

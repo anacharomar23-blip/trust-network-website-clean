@@ -2,32 +2,27 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Phone, Users, Mic, BarChart3, Database, Headphones, Server } from 'lucide-react';
 
-// Workaround for framer-motion type mismatch
-const MotionDiv = motion.div as any;
-const MotionH2 = motion.h2 as any;
-const MotionH3 = motion.h3 as any;
-
 const VoipSection: React.FC = () => {
   return (
     <section id="voip" className="py-24 bg-tech-dark relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <MotionH2 
+          <motion.h2 
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             className="text-tech-trust font-display text-lg tracking-widest uppercase mb-2"
           >
             Comunicações Unificadas
-          </MotionH2>
-          <MotionH3 
+          </motion.h2>
+          <motion.h3 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             className="text-4xl md:text-5xl font-bold text-white mb-6"
           >
             TRUST VoIP SERVER
-          </MotionH3>
+          </motion.h3>
           <p className="max-w-3xl mx-auto text-gray-400 text-lg">
             Uma plataforma completa que integra PABX, Call Center e URA Interativa, permitindo que sua empresa realize ligações de qualquer dispositivo conectado.
           </p>
@@ -128,7 +123,7 @@ const VoipCard: React.FC<{
   color: string;
   highlight?: boolean;
 }> = ({ title, icon, description, features, color, highlight }) => (
-  <MotionDiv 
+  <motion.div 
     whileHover={{ y: -10 }}
     className={`bg-tech-card p-8 rounded-2xl border-t-4 ${color} ${highlight ? 'shadow-[0_0_30px_rgba(34,197,94,0.1)] ring-1 ring-white/10' : 'shadow-lg'}`}
   >
@@ -145,7 +140,7 @@ const VoipCard: React.FC<{
         </li>
       ))}
     </ul>
-  </MotionDiv>
+  </motion.div>
 );
 
 const UraOption: React.FC<{ num: string; text: string }> = ({ num, text }) => (

@@ -25,6 +25,13 @@ const Footer: React.FC = () => {
     window.location.href = mailtoLink;
   };
 
+  const handleWhatsAppClick = () => {
+    const phoneNumber = "258876124389";
+    const message = "Olá, vim através do site e gostaria de falar com a Trust Network.";
+    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+    window.open(whatsappUrl, '_blank');
+  };
+
   return (
     <footer id="contact" className="bg-black pt-16 border-t border-slate-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -68,6 +75,7 @@ const Footer: React.FC = () => {
               <li><a href="#home" className="hover:text-tech-trust transition-colors">Início</a></li>
               <li><a href="#voip" className="hover:text-tech-trust transition-colors">VoIP Server</a></li>
               <li><a href="#trustguard" className="hover:text-tech-trust transition-colors">TrustGuard</a></li>
+              <li><a href="#store" className="hover:text-tech-trust transition-colors">Loja</a></li>
               <li><a href="#contact" className="hover:text-tech-trust transition-colors">Suporte Técnico</a></li>
             </ul>
           </div>
@@ -80,13 +88,13 @@ const Footer: React.FC = () => {
                 <MapPin className="w-5 h-5 text-tech-trust shrink-0" />
                 <span>Rua Samuel Dambula, nº 34, R/C<br/>Maputo, Moçambique</span>
               </li>
-              <li className="flex items-center gap-3">
-                <Mail className="w-5 h-5 text-tech-trust shrink-0" />
-                <span>comercial@trustnetwork.co.mz</span>
+              <li className="flex items-center gap-3 group cursor-pointer" onClick={() => window.location.href = "mailto:trustnetwork.vendas@outlook.com"}>
+                <Mail className="w-5 h-5 text-tech-trust shrink-0 group-hover:text-white transition-colors" />
+                <span className="group-hover:text-white transition-colors">trustnetwork.vendas@outlook.com</span>
               </li>
-              <li className="flex items-center gap-3">
-                <Phone className="w-5 h-5 text-tech-trust shrink-0" />
-                <span>+258 84 000 0000</span>
+              <li className="flex items-center gap-3 group cursor-pointer" onClick={handleWhatsAppClick}>
+                <Phone className="w-5 h-5 text-tech-trust shrink-0 group-hover:text-white transition-colors" />
+                <span className="group-hover:text-white transition-colors">+258 87 612 4389</span>
               </li>
               <li className="flex items-center gap-3">
                 <Clock className="w-5 h-5 text-tech-trust shrink-0" />
