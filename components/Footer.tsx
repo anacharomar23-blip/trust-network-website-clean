@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { MapPin, Mail, Phone, Clock, Facebook, Linkedin, Instagram, Send } from 'lucide-react';
+import { MapPin, Mail, Phone, Clock, Facebook, Linkedin, Instagram } from 'lucide-react';
 
 const Footer: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -10,25 +10,19 @@ const Footer: React.FC = () => {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
+    setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSendEmail = (e: React.FormEvent) => {
     e.preventDefault();
+    const { name, email, message } = formData;
+    const subject = "Contato via Site Trust Network";
+    const body = `Nome: ${name}\nEmail: ${email}\n\nMensagem:\n${message}`;
     
-    // Cria o assunto e o corpo do email com base no formulário
-    const subject = `Contacto via Site: ${formData.name}`;
-    const body = `Nome: ${formData.name}
-Email: ${formData.email}
-
-Mensagem:
-${formData.message}`;
-
-    // Redireciona para o cliente de email
-    window.location.href = `mailto:trustnetwork.vendas@outlook.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    // Constrói o link mailto com os dados preenchidos
+    const mailtoLink = `mailto:trustnetwork.vendas@outlook.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    
+    window.location.href = mailtoLink;
   };
 
   return (
@@ -61,9 +55,9 @@ ${formData.message}`;
                Especialistas em soluções de comunicação corporativa, redes seguras e automação de atendimento. Conectando sua empresa ao futuro.
              </p>
              <div className="flex gap-4">
-               <SocialIcon icon={<Facebook size={18} />} />
-               <SocialIcon icon={<Linkedin size={18} />} />
-               <SocialIcon icon={<Instagram size={18} />} />
+               <SocialIcon href="https://web.facebook.com/profile.php?id=825124389" icon={<Facebook size={18} />} />
+               <SocialIcon href="#" icon={<Linkedin size={18} />} />
+               <SocialIcon href="#" icon={<Instagram size={18} />} />
              </div>
           </div>
 
@@ -88,14 +82,11 @@ ${formData.message}`;
               </li>
               <li className="flex items-center gap-3">
                 <Mail className="w-5 h-5 text-tech-trust shrink-0" />
-                <a href="mailto:trustnetwork.vendas@outlook.com" className="hover:text-white transition-colors">trustnetwork.vendas@outlook.com</a>
+                <span>comercial@trustnetwork.co.mz</span>
               </li>
-              <li className="flex items-start gap-3">
-                <Phone className="w-5 h-5 text-tech-trust shrink-0 mt-1" />
-                <div className="flex flex-col gap-1">
-                  <span>+258 84 230 0058</span>
-                  <span>+258 87 612 4389</span>
-                </div>
+              <li className="flex items-center gap-3">
+                <Phone className="w-5 h-5 text-tech-trust shrink-0" />
+                <span>+258 84 000 0000</span>
               </li>
               <li className="flex items-center gap-3">
                 <Clock className="w-5 h-5 text-tech-trust shrink-0" />
@@ -107,15 +98,15 @@ ${formData.message}`;
           {/* Newsletter / CTA */}
           <div>
             <h4 className="text-white font-bold mb-6 font-display">Fale Conosco</h4>
-            <form onSubmit={handleSubmit} className="space-y-3">
+            <form onSubmit={handleSendEmail} className="space-y-3">
               <input 
                 type="text" 
                 name="name"
                 value={formData.name}
                 onChange={handleChange}
                 placeholder="Seu Nome" 
+                className="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-2 text-sm text-white focus:border-tech-trust focus:outline-none focus:ring-1 focus:ring-tech-trust"
                 required
-                className="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-2 text-sm text-white focus:border-tech-trust focus:outline-none focus:ring-1 focus:ring-tech-trust transition-all"
               />
               <input 
                 type="email" 
@@ -123,24 +114,20 @@ ${formData.message}`;
                 value={formData.email}
                 onChange={handleChange}
                 placeholder="Seu Email" 
+                className="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-2 text-sm text-white focus:border-tech-trust focus:outline-none focus:ring-1 focus:ring-tech-trust"
                 required
-                className="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-2 text-sm text-white focus:border-tech-trust focus:outline-none focus:ring-1 focus:ring-tech-trust transition-all"
               />
               <textarea 
                 name="message"
                 value={formData.message}
                 onChange={handleChange}
-                placeholder="Escreva sua mensagem aqui..." 
-                required
+                placeholder="Mensagem" 
                 rows={3}
-                className="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-2 text-sm text-white focus:border-tech-trust focus:outline-none focus:ring-1 focus:ring-tech-trust resize-none transition-all"
+                className="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-2 text-sm text-white focus:border-tech-trust focus:outline-none focus:ring-1 focus:ring-tech-trust"
+                required
               ></textarea>
-              <button 
-                type="submit"
-                className="w-full group bg-tech-trust hover:bg-green-500 text-black font-bold py-2 rounded-lg transition-all text-sm flex items-center justify-center gap-2 hover:shadow-[0_0_15px_rgba(34,197,94,0.4)]"
-              >
-                <span>Enviar Email</span>
-                <Send size={16} className="group-hover:translate-x-1 transition-transform" />
+              <button type="submit" className="w-full bg-tech-trust hover:bg-green-500 text-black font-bold py-2 rounded-lg transition-colors text-sm">
+                Enviar Mensagem
               </button>
             </form>
           </div>
@@ -157,8 +144,8 @@ ${formData.message}`;
   );
 };
 
-const SocialIcon: React.FC<{ icon: React.ReactNode }> = ({ icon }) => (
-  <a href="#" className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center text-gray-400 hover:bg-tech-trust hover:text-black transition-all">
+const SocialIcon: React.FC<{ icon: React.ReactNode; href?: string }> = ({ icon, href = "#" }) => (
+  <a href={href} target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center text-gray-400 hover:bg-tech-trust hover:text-black transition-all">
     {icon}
   </a>
 );
