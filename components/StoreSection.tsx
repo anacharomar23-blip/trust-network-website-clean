@@ -1,6 +1,6 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { ShoppingBag, ArrowRight, Cpu, Cable, Layers, Zap } from 'lucide-react';
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { ShoppingBag, ArrowRight, Cpu, Cable, Layers, Zap, Mail, MessageCircle } from 'lucide-react';
 
 interface Product {
   id: number;
@@ -89,6 +89,8 @@ const products: Product[] = [
 ];
 
 const StoreSection: React.FC = () => {
+  const [showQuoteOptions, setShowQuoteOptions] = useState(false);
+
   return (
     <section id="store" className="py-24 bg-tech-dark relative min-h-[800px]">
       {/* Background Decor */}
@@ -130,15 +132,47 @@ const StoreSection: React.FC = () => {
             </motion.p>
           </div>
           
-          <motion.button 
-             initial={{ opacity: 0, x: 20 }}
-             whileInView={{ opacity: 1, x: 0 }}
-             viewport={{ once: true }}
-             onClick={() => window.location.href = "mailto:trustnetwork.vendas@outlook.com?subject=Solicitação de Cotação - Equipamentos"}
-             className="px-8 py-4 bg-tech-trust/10 border border-tech-trust/50 text-tech-trust hover:bg-tech-trust hover:text-black rounded-sm transition-all flex items-center gap-3 font-bold whitespace-nowrap group backdrop-blur-sm"
-          >
-            SOLICITAR COTAÇÃO <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
-          </motion.button>
+          <div className="relative z-20">
+            <motion.button 
+               initial={{ opacity: 0, x: 20 }}
+               whileInView={{ opacity: 1, x: 0 }}
+               viewport={{ once: true }}
+               onClick={() => setShowQuoteOptions(!showQuoteOptions)}
+               className="px-8 py-4 bg-tech-trust/10 border border-tech-trust/50 text-tech-trust hover:bg-tech-trust hover:text-black rounded-sm transition-all flex items-center gap-3 font-bold whitespace-nowrap group backdrop-blur-sm"
+            >
+              SOLICITAR COTAÇÃO <ArrowRight size={20} className={`transition-transform duration-300 ${showQuoteOptions ? 'rotate-90' : 'group-hover:translate-x-1'}`} />
+            </motion.button>
+
+            <AnimatePresence>
+              {showQuoteOptions && (
+                <motion.div
+                  initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                  transition={{ duration: 0.2 }}
+                  className="absolute right-0 top-full mt-2 w-full min-w-[240px] bg-slate-900 border border-slate-700 rounded-lg shadow-[0_0_30px_rgba(0,0,0,0.5)] overflow-hidden flex flex-col backdrop-blur-xl"
+                >
+                   <a 
+                     href="mailto:trustnetwork.vendas@outlook.com?subject=Solicitação de Cotação - Equipamentos"
+                     className="flex items-center gap-3 px-5 py-4 text-sm font-medium text-gray-300 hover:bg-tech-trust hover:text-black transition-colors"
+                     onClick={() => setShowQuoteOptions(false)}
+                   >
+                     <Mail size={18} /> <span>Via Email</span>
+                   </a>
+                   <div className="h-px bg-slate-800 w-full"></div>
+                   <a 
+                     href="https://wa.me/258876124389?text=Gostaria%20de%20solicitar%20uma%20cota%C3%A7%C3%A3o%20de%20equipamentos"
+                     target="_blank"
+                     rel="noopener noreferrer"
+                     className="flex items-center gap-3 px-5 py-4 text-sm font-medium text-gray-300 hover:bg-tech-trust hover:text-black transition-colors"
+                     onClick={() => setShowQuoteOptions(false)}
+                   >
+                     <MessageCircle size={18} /> <span>Via WhatsApp</span>
+                   </a>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
         </div>
 
         {/* Grid de Produtos Atualizado */}
