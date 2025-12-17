@@ -40,22 +40,22 @@ const Footer: React.FC = () => {
           {/* Brand */}
           <div className="col-span-1 md:col-span-2 lg:col-span-1">
              <div className="flex items-center gap-3 mb-6">
-                <div className="w-10 h-10">
-                  <svg viewBox="0 0 100 100" className="w-full h-full text-tech-trust">
-                    <path d="M15 45 C15 45 35 20 50 20 C65 20 85 45 85 45" stroke="currentColor" strokeWidth="8" strokeLinecap="round" fill="none" />
-                    <path d="M28 58 C28 58 40 45 50 45 C60 45 72 58 72 58" stroke="currentColor" strokeWidth="8" strokeLinecap="round" fill="none" />
-                    <path d="M35 75 Q 50 60 65 75" stroke="currentColor" strokeWidth="8" strokeLinecap="round" fill="none" />
-                    <circle cx="35" cy="88" r="6" fill="currentColor" />
-                    <circle cx="65" cy="88" r="6" fill="currentColor" />
-                  </svg>
-                </div>
-                <div className="flex flex-col">
-                  <span className="font-display font-bold text-2xl tracking-wide text-white leading-none">
-                    TRUST
-                  </span>
-                  <span className="font-sans text-sm tracking-[0.1em] text-tech-trust font-medium leading-none lowercase">
-                    network lda
-                  </span>
+                {/* Logótipo Imagem Ampliado (w-24 h-24) com Fundo Luminoso */}
+                <div className="relative w-24 h-24 flex items-center justify-center">
+                  
+                  {/* Efeito Luminoso de Fundo */}
+                  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 bg-gradient-to-tr from-tech-trust/20 via-white/5 to-tech-accent/20 rounded-full blur-2xl"></div>
+                  <div className="absolute inset-0 bg-white/5 rounded-full blur-xl animate-pulse"></div>
+
+                  <img 
+                    src="https://i.ibb.co/VckMmPhQ/logo.png" 
+                    onError={(e) => {
+                        const target = e.target as HTMLImageElement;
+                        target.src = "https://ibb.co/VckMmPhQ";
+                    }}
+                    alt="Trust Network Logo" 
+                    className="w-full h-full object-contain relative z-10 drop-shadow-[0_0_5px_rgba(255,255,255,0.2)]"
+                  />
                 </div>
              </div>
              <p className="text-gray-400 text-sm leading-relaxed mb-6">

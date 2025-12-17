@@ -30,7 +30,8 @@ const Navbar: React.FC = () => {
     // Busca o elemento e rola com offset
     const element = document.querySelector(targetId);
     if (element) {
-      const headerOffset = 85; // Altura do menu + margem
+      // Ajustado o offset para 130 devido ao aumento do tamanho do logo/header
+      const headerOffset = 130; 
       const elementPosition = element.getBoundingClientRect().top;
       const offsetPosition = elementPosition + window.scrollY - headerOffset;
 
@@ -54,38 +55,32 @@ const Navbar: React.FC = () => {
     <nav
       className={`fixed w-full z-50 transition-all duration-300 ${
         scrolled
-          ? 'bg-tech-dark/90 backdrop-blur-md border-b border-white/10 py-3'
-          : 'bg-transparent py-5'
+          ? 'bg-tech-dark/90 backdrop-blur-md border-b border-white/10 py-2'
+          : 'bg-transparent py-4'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-10">
+        <div className="flex items-center justify-between">
           <div 
-            className="flex-shrink-0 flex items-center gap-3 cursor-pointer group" 
+            className="flex-shrink-0 flex items-center cursor-pointer group relative" 
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
           >
-             {/* Custom Trust Network Logo SVG */}
-             <div className="relative w-10 h-10 flex items-center justify-center">
-                <svg viewBox="0 0 100 100" className="w-full h-full text-tech-trust drop-shadow-[0_0_8px_rgba(34,197,94,0.5)]">
-                  {/* Outer Arc */}
-                  <path d="M15 45 C15 45 35 20 50 20 C65 20 85 45 85 45" stroke="currentColor" strokeWidth="8" strokeLinecap="round" fill="none" className="group-hover:stroke-white transition-colors duration-300" />
-                  {/* Middle Arc */}
-                  <path d="M28 58 C28 58 40 45 50 45 C60 45 72 58 72 58" stroke="currentColor" strokeWidth="8" strokeLinecap="round" fill="none" />
-                  {/* Bridge/Smile */}
-                  <path d="M35 75 Q 50 60 65 75" stroke="currentColor" strokeWidth="8" strokeLinecap="round" fill="none" />
-                  {/* Dots */}
-                  <circle cx="35" cy="88" r="6" fill="currentColor" />
-                  <circle cx="65" cy="88" r="6" fill="currentColor" />
-                </svg>
-             </div>
-             
-             <div className="flex flex-col justify-center">
-                <span className="font-display font-bold text-2xl tracking-wide text-white leading-none">
-                  TRUST
-                </span>
-                <span className="font-sans text-sm tracking-[0.1em] text-tech-trust font-medium leading-none lowercase">
-                  network lda
-                </span>
+             {/* Logótipo Imagem Ampliado (Tamanho Duplicado: w-24 h-24) com Fundo Luminoso */}
+             <div className="relative w-24 h-24 flex items-center justify-center transition-all duration-300 z-10">
+                
+                {/* Efeito Luminoso de Fundo (Backlight) */}
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 bg-tech-trust/20 rounded-full blur-2xl opacity-60 pointer-events-none group-hover:opacity-80 transition-opacity duration-500"></div>
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-20 h-20 bg-white/15 rounded-full blur-xl pointer-events-none group-hover:bg-white/25 transition-colors duration-500 animate-pulse"></div>
+                
+                <img 
+                  src="https://i.ibb.co/VckMmPhQ/logo.png" 
+                  onError={(e) => {
+                    const target = e.target as HTMLImageElement;
+                    target.src = "https://ibb.co/VckMmPhQ"; 
+                  }}
+                  alt="Trust Network Logo" 
+                  className="w-full h-full object-contain relative z-10 drop-shadow-[0_0_5px_rgba(255,255,255,0.3)]"
+                />
              </div>
           </div>
           
@@ -105,7 +100,7 @@ const Navbar: React.FC = () => {
               <a 
                 href="#contact"
                 onClick={(e) => handleNavClick(e, '#contact')}
-                className="px-5 py-2 rounded-full bg-tech-trust/10 border border-tech-trust/50 text-tech-trust hover:bg-tech-trust hover:text-white transition-all duration-300 font-bold text-sm cursor-pointer"
+                className="px-5 py-2 rounded-full bg-tech-trust/10 border border-tech-trust/50 text-tech-trust hover:bg-tech-trust hover:text-white transition-all duration-300 font-bold text-sm cursor-pointer hover:shadow-[0_0_15px_rgba(34,197,94,0.4)]"
               >
                 Fale Conosco
               </a>

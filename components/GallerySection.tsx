@@ -37,7 +37,7 @@ const galleryItems = [
     id: 6,
     title: "Equipe Especializada",
     description: "Dispomos de técnicos altamente qualificados e certificados prontos para actuar.",
-    image: "https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&w=800&q=80", // Technician working
+    image: "https://i.ibb.co/LzZ8CVgB/image.png", // Imagem atualizada conforme solicitado
   }
 ];
 
@@ -87,6 +87,14 @@ const GallerySection: React.FC = () => {
                   src={item.image} 
                   alt={item.title} 
                   loading="lazy"
+                  onError={(e) => {
+                    // Fallback visual silencioso se a imagem externa falhar
+                    const target = e.target as HTMLImageElement;
+                    if (item.id === 6 && !target.src.includes('retry')) {
+                        // Tenta uma variação comum se o link direto estimado falhar
+                        // target.src = "https://i.ibb.co/LzZ8CVgB/equipe.jpg"; 
+                    }
+                  }}
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 group-hover:filter group-hover:grayscale-0 grayscale-[0.3]"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent opacity-90 transition-opacity duration-300 group-hover:opacity-80"></div>
